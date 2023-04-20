@@ -4,7 +4,7 @@ export const updateListingRoute = {
   path: "/api/listings/{id}",
   handler: async (req, h) => {
     const { id } = req.params;
-    const { name = "", description = "", price = 0 } = JSON.parse(req.payload);
+    const { name = "", description = "", price = 0 } = req.payload;
     const userId = "12345";
 
     await db.query(
