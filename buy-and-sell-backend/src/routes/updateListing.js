@@ -1,11 +1,14 @@
+import * as admin from "firebase-admin";
 import { db } from "../database";
 export const updateListingRoute = {
   method: "POST",
   path: "/api/listings/{id}",
   handler: async (req, h) => {
+    const token = req.headers.authtoken;
+    const user = await admin.auth().verifyIdToken(token);
+    const userId = user.user_id;
     const { id } = req.params;
     const { name = "", description = "", price = 0 } = req.payload;
-    const userId = "12345";
 
     await db.query(
       `

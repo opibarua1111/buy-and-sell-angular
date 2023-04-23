@@ -1,8 +1,15 @@
 "use strict";
 
 const Hapi = require("@hapi/hapi");
+import * as admin from "firebase-admin";
+import credentials from "../credentials.json";
 import { db } from "./database";
 import routes from "./routes";
+
+admin.initializeApp({
+  credential: admin.credential.cert(credentials),
+});
+
 let server;
 
 const start = async () => {
